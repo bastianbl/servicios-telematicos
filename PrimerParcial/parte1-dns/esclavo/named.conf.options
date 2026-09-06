@@ -1,0 +1,32 @@
+options {
+    // Directorio de trabajo de BIND.
+    directory "/var/cache/bind";
+
+    // Direcciones IPv4 donde escucha el DNS esclavo.
+    listen-on { 127.0.0.1; 192.168.50.2; };
+
+    // Direcciones IPv6 donde escucha el DNS esclavo.
+    listen-on-v6 { ::1; fd50::2; };
+
+    // Se desactiva la recursión para evitar funcionar como open resolver.
+    recursion no;
+
+    // Solo se permiten consultas desde las redes previstas.
+    allow-query {
+        127.0.0.1;
+        192.168.50.0/24;
+        fd50::/64;
+    };
+
+    // Response Rate Limiting para mitigar abuso y
+    // posibles ataques de amplificación DNS.
+    rate-limit {
+        responses-per-second 10;
+        window 5;
+    };
+
+    // Validación DNSSEC automática.
+    dnssec-validation auto;
+
+    auth-nxdomain no;
+};

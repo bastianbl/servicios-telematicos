@@ -1,0 +1,21 @@
+; Zona directa almacenada por el servidor DNS esclavo.
+; Esta copia fue obtenida automáticamente desde el maestro mediante AXFR/IXFR.
+; Los comentarios originales del archivo maestro no se transfieren mediante una transferencia DNS.
+
+empresa.local.				      3600 IN SOA	ns1.empresa.local. admin.empresa.local. 2026090504 3600 900 604800 86400
+empresa.local.				      3600 IN NS	ns1.empresa.local.
+empresa.local.				      3600 IN NS	ns2.empresa.local.
+empresa.local.				      3600 IN MX	10 mail.empresa.local.
+ftp.empresa.local.			      3600 IN CNAME	www.empresa.local.
+ixfrtest.empresa.local.			      3600 IN A		192.168.50.3
+mail.empresa.local.			      3600 IN A		192.168.50.3
+mail.empresa.local.			      3600 IN AAAA	fd50::3
+ns1.empresa.local.			      3600 IN A		192.168.50.3
+ns1.empresa.local.			      3600 IN AAAA	fd50::3
+ns2.empresa.local.			      3600 IN A		192.168.50.2
+ns2.empresa.local.			      3600 IN AAAA	fd50::2
+parcial.empresa.local.			      3600 IN CNAME	www.empresa.local.
+prueba.empresa.local.			      3600 IN A		192.168.50.3
+prueba2.empresa.local.			      3600 IN A		192.168.50.3
+www.empresa.local.			      3600 IN A		192.168.50.3
+www.empresa.local.			      3600 IN AAAA	fd50::3

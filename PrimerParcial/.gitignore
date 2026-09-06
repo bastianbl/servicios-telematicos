@@ -1,0 +1,11 @@
+# Claves y secretos reales
+esclavo.key
+*.key
+
+# Archivos internos de BIND
+*.jnl
+*.raw
+
+# Archivos temporales
+*.tmp
+*~

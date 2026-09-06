@@ -1,0 +1,9 @@
+; Zona inversa almacenada por el servidor DNS esclavo.
+; Esta copia fue obtenida automáticamente desde el maestro mediante AXFR/IXFR.
+; El servidor esclavo mantiene esta información para garantizar continuidad del servicio.
+
+50.168.192.in-addr.arpa.		      3600 IN SOA	ns1.empresa.local. admin.empresa.local. 2026090501 3600 900 604800 86400
+50.168.192.in-addr.arpa.		      3600 IN NS	ns1.empresa.local.
+50.168.192.in-addr.arpa.		      3600 IN NS	ns2.empresa.local.
+2.50.168.192.in-addr.arpa.		      3600 IN PTR	esclavo.empresa.local.
+3.50.168.192.in-addr.arpa.		      3600 IN PTR	maestro.empresa.local.

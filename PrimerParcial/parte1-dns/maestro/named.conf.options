@@ -1,0 +1,33 @@
+options {
+    // Directorio de trabajo utilizado por BIND.
+    directory "/var/cache/bind";
+
+    // BIND escucha consultas IPv4 localmente y en la IP del maestro.
+    listen-on { 127.0.0.1; 192.168.50.3; };
+
+    // Interfaces IPv6 permitidas.
+    listen-on-v6 { ::1; fd50::3; };
+
+    // Se desactiva la recursión porque el servidor funciona
+    // como DNS autoritativo y no debe actuar como open resolver.
+    recursion no;
+
+    // Solo las redes previstas pueden realizar consultas.
+    allow-query {
+        127.0.0.1;
+        192.168.50.0/24;
+        fd50::/64;
+    };
+
+    // Response Rate Limiting para reducir el riesgo
+    // de abuso mediante consultas repetitivas o amplificación DNS.
+    rate-limit {
+        responses-per-second 10;
+        window 5;
+    };
+
+    // Validación DNSSEC automática.
+    dnssec-validation auto;
+
+    auth-nxdomain no;
+};

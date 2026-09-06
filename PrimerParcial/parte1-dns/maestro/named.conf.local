@@ -1,0 +1,39 @@
+// Clave TSIG compartida con el servidor esclavo.
+// Se utiliza para autenticar y restringir las transferencias de zona.
+include "/etc/bind/keys/esclavo.key";
+
+// Zona directa principal empresa.local.
+zone "empresa.local" {
+    type master;
+
+    // Archivo donde se almacenan los registros de la zona directa.
+    file "/etc/bind/db.empresa.local";
+
+    // Journal utilizado por BIND para almacenar cambios incrementales
+    // y permitir transferencias IXFR.
+    journal "/var/cache/bind/db.empresa.local.jnl";
+    ixfr-from-differences yes;
+
+    // NOTIFY informa automáticamente al esclavo cuando cambia la zona.
+    notify yes;
+    also-notify { 192.168.50.2; };
+
+    // Solo se permiten transferencias al cliente autenticado
+    // mediante la clave TSIG esclavo-key.
+    allow-transfer { key esclavo-key; };
+};
+
+// Zona inversa correspondiente a la red 192.168.50.0/24.
+zone "50.168.192.in-addr.arpa" {
+    type master;
+
+    // Archivo con los registros PTR de resolución inversa.
+    file "/etc/bind/db.192.168.50";
+
+    // Notifica al servidor esclavo cuando existe una actualización.
+    notify yes;
+    also-notify { 192.168.50.2; };
+
+    // La transferencia también está protegida mediante TSIG.
+    allow-transfer { key esclavo-key; };
+};

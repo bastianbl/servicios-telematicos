@@ -1,0 +1,49 @@
+; Tiempo de vida predeterminado de los registros: 3600 segundos.
+$TTL 3600
+
+; Registro SOA: define el servidor DNS principal y parámetros
+; de sincronización de la zona.
+@       IN      SOA     ns1.empresa.local. admin.empresa.local. (
+                        2026090504 ; Serial de la zona
+                        3600       ; Refresh
+                        900        ; Retry
+                        604800     ; Expiry
+                        86400 )    ; Minimum TTL
+
+; Servidores DNS autoritativos de empresa.local.
+        IN      NS      ns1.empresa.local.
+        IN      NS      ns2.empresa.local.
+
+; Servidor de correo de la zona.
+        IN      MX      10 mail.empresa.local.
+
+; DNS maestro.
+ns1     IN      A       192.168.50.3
+ns1     IN      AAAA    fd50::3
+
+; DNS esclavo.
+ns2     IN      A       192.168.50.2
+ns2     IN      AAAA    fd50::2
+
+; Servidor web.
+www     IN      A       192.168.50.3
+www     IN      AAAA    fd50::3
+
+; Servidor de correo.
+mail    IN      A       192.168.50.3
+mail    IN      AAAA    fd50::3
+
+; Alias FTP apuntando al servidor web.
+ftp     IN      CNAME   www
+
+; Dominio utilizado por el sitio Apache de la Parte 2.
+parcial IN      CNAME   www
+
+; Registros utilizados para comprobar la sincronización
+; automática entre maestro y esclavo.
+prueba  IN      A       192.168.50.3
+prueba2 IN      A       192.168.50.3
+
+; Registro creado específicamente para demostrar
+; la transferencia incremental IXFR.
+ixfrtest IN     A       192.168.50.3
