@@ -1,5 +1,5 @@
 # Primer Parcial — Servicios Telemáticos
-
+# Sebastian Bustamante - Santiago López - Byron Zapata
 ## Microproyecto integrador
 
 Implementación de una infraestructura de servicios telemáticos compuesta por:
